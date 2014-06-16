@@ -9,7 +9,15 @@
 </head>
 
 <body class="{{body_class}}" {% if g.user %} class="logged-in"{% endif %}>
-
+{# SVG icon system #}
+{% autoescape false %}
+	{{ icons }}
+{% endautoescape %}
+{% macro icon(name) -%}
+	<svg class="icon">
+		<use xlink:href="#icon-{{name}}" />
+	</svg>
+{%- endmacro %}
 <header class="navbar" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -32,7 +40,8 @@
 	<!-- 	</form> -->
 	<!-- </div> -->
 		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right clearfix">
+				<li class="add"><a href="/add">{{ icon('plus') }} Add to the index</a></li>
 				<li><a href="/help">Help</a></li>
 				<li><a href="/about">About</a></li>
 {% if g.user %}
@@ -59,13 +68,13 @@
 		</div>
 		<div class="social col-md-6">
 			<ul class="nav nav-pills">
-				<li><a href="https://twitter.com/openshift" target="_blank"><span class="icon icon-twitter"></span></a></li>
-				<li><a href="http://www.reddit.com/r/OpenShift/" target="_blank"><span class="icon icon-reddit"></span></a></li>
-				<li><a href="http://stackoverflow.com/questions/tagged/openshift" target="_blank"><span class="icon icon-stackoverflow"></span></a></li>
-				<li><a href="https://plus.google.com/u/0/communities/114361859072744017486" target="_blank"><span class="icon icon-googleplus"></span></a></li>
-				<li><a href="http://www.slideshare.net/openshift" target="_blank"><span class="icon icon-slideshare"></span></a></li>
-				<li><a href="https://github.com/openshift" target="_blank"><span class="icon icon-github"></span></a></li>
-				<li><a href="https://www.youtube.com/user/rhopenshift" target="_blank"><span class="icon icon-youtube"></span></a></li>
+				<li><a href="https://twitter.com/openshift" target="_blank">{{ icon('twitter') }}</a></li>
+				<li><a href="http://www.reddit.com/r/OpenShift/" target="_blank">{{ icon('reddit') }}</a></li>
+				<li><a href="http://stackoverflow.com/questions/tagged/openshift" target="_blank">{{ icon('stack-overflow') }}</a></li>
+				<li><a href="https://plus.google.com/u/0/communities/114361859072744017486" target="_blank">{{ icon('google-plus') }}</a></li>
+				<li><a href="http://www.slideshare.net/openshift" target="_blank">{{ icon('slideshare') }}</a></li>
+				<li><a href="https://github.com/openshift" target="_blank">{{ icon('github') }}</a></li>
+				<li><a href="https://www.youtube.com/user/rhopenshift" target="_blank">{{ icon('youtube') }}</a></li>
 			</ul>
 		</div>
 	</div>

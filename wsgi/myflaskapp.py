@@ -119,6 +119,11 @@ def humanize_time(datestr):
     dt = dateutil.parser.parse(datestr)
     return format_timedelta(datetime.datetime.utcnow() - dt, locale='en_US') + ' ago'
 
+@app.context_processor
+def inject_icons():
+   f = open('wsgi/static/img/icons.svg')
+   return dict(icons=f.read().strip())
+
 ## Quickstart file ########
 class Quickstarts:
     '''Parse and cache content of file `quickstarts`.
@@ -131,7 +136,7 @@ class Quickstarts:
 
     def sync_data(self):
         index = []
- 
+
         #read the current quickstart file
         for item in self.all():
             #refresh the stats for each record
@@ -146,7 +151,7 @@ class Quickstarts:
         qs_json.write(data)
         qs_json.close()
         self.data = data
- 
+
     def load_data(self):
         self.path = app.config['OO_INDEX_QUICKSTART_JSON_FULLPATH']
         self.data = Quickstarts.cached
@@ -171,7 +176,7 @@ class Quickstarts:
                 if qstart['type'].lower() == 'quickstart' and qstart.has_key('cartridges') and not qstart.has_key('launch_url'):
                     qstart['launch_url'] = make_launch_url(qstart['git_repo_url'], qstart['cartridges'], qstart['default_app_name'])
             self.data = Quickstarts.cached = qstarts
-            
+
         except Exception, ex:
             print >>sys.stderr, "Error parsing file %s: %s" % (self.path, ex)
             raise

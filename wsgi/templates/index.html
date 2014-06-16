@@ -7,7 +7,6 @@
 				Find, browse, and launch OpenShift quickstarts and cartridges.
 			</p>
 			{% include 'partials/search_form.html' %}
-			<p><a href="/add">Add your quickstarts and cartridges</a></p>
 		</div>
 	</div>
 
@@ -36,7 +35,7 @@
 					{% if qs.launch_url %}
 						<div class="launch">
 							<a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>
-								<span class="icon icon-rocket"></span>
+								{{ icon('rocket') }}
 							</a>
 						</div>
 					{% endif %}
@@ -59,7 +58,7 @@
 					{% if qs.launch_url %}
 						<div class="launch">
 							<a title="Launch {{qs.name}}" href='{{qs.launch_url}}'>
-								 <span class="icon icon-rocket"></span>
+								{{ icon('rocket') }}
 							</a>
 						</div>
 					{% endif %}
